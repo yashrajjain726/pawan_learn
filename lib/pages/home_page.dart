@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../drawer.dart';
-import '../name_card_widget.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,12 +9,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var myText = "Change My Name";
-  TextEditingController _nameController = TextEditingController();
+  // var myText = "Change My Name";
+  // TextEditingController _nameController = TextEditingController();
+
+  var url = "https://jsonplaceholder.typicode.com/photos";
+  var data;
 
   @override
   void initState() {
     super.initState();
+    fetchData();
+  }
+
+  fetchData() async {
+    var response = await http.get(url);
+    data = jsonDecode(response.body);
+    print(data);
+    setState() {}
   }
 
   @override
@@ -28,20 +39,27 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Awesome App"),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child:
-                NameCardWidget(myText: myText, nameController: _nameController),
-          ),
-        ),
-      ),
+      body: data != null
+          ? ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(
+                    data[index]['title'],
+                  ),
+                  subtitle: Text(
+                    "${data[index]['id']}",
+                  ),
+                  leading: Image.network(data[index]['url']),
+                );
+              },
+              itemCount: data.length)
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
       drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          myText = _nameController.text;
-          setState(() {});
+          // setState(() {});
         },
         child: Icon(Icons.send),
       ),
