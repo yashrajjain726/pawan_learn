@@ -18,8 +18,26 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Awesome App"),
       ),
-      body: Container(
-        child: Text("Hi Flutter"),
+      body: Center(
+        child: Container(
+            padding: EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(10.0),
+              gradient: LinearGradient(
+                colors: [Colors.pink, Colors.yellow],
+              ),
+              boxShadow: [
+                BoxShadow(color: Colors.grey, blurRadius: 5.0),
+              ],
+            ),
+            width: 100,
+            height: 100,
+            child: Text(
+              "I am a Box",
+              style: TextStyle(color: Colors.white),
+            )),
       ),
     );
   }
