@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = "/homepage";
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     var response = await http.get(url);
     data = jsonDecode(response.body);
     print(data);
-    setState() {}
+    setState(() {});
   }
 
   @override
@@ -37,6 +38,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
         title: Text("Awesome App"),
       ),
       body: data != null
