@@ -40,7 +40,9 @@ class _HomePageState extends State<HomePage> {
         title: Text("Awesome App"),
       ),
       body: data != null
-          ? ListView.builder(
+          ? GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
