@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawan_learn/pages/home_page.dart';
+import 'package:pawan_learn/pages/home_page_with_fb.dart';
 import 'package:pawan_learn/pages/login_page.dart';
 import 'package:pawan_learn/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Constants.prefs.getBool("Logged In") == true
-          ? HomePage()
+          ? HomePageFB()
           : LoginPage(),
       theme: ThemeData(primarySwatch: Colors.red),
       debugShowCheckedModeBanner: false,
