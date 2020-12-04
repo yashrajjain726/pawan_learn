@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pawan_learn/pages/login_page.dart';
+import 'package:pawan_learn/utils/constants.dart';
 import '../drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -42,7 +44,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () {
-              Navigator.pop(context);
+              Constants.prefs.setBool("Logged In", false);
+              Navigator.pushReplacementNamed(context, LoginPage.routeName);
             },
           ),
         ],

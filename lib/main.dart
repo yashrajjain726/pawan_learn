@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pawan_learn/pages/home_page.dart';
 import 'package:pawan_learn/pages/login_page.dart';
+import 'package:pawan_learn/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future main() async {
   //WidgetApp //MaterialApp //CupertinoApp
+  WidgetsFlutterBinding.ensureInitialized();
+  Constants.prefs = await SharedPreferences.getInstance();
   runApp(MyApp());
 }
 
@@ -11,7 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(),
+      home: Constants.prefs.getBool("Logged In") == true
+          ? HomePage()
+          : LoginPage(),
       theme: ThemeData(primarySwatch: Colors.red),
       debugShowCheckedModeBanner: false,
       routes: {
